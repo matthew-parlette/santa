@@ -19,6 +19,3 @@
 
 # Ignore Byebug command history file.
 .byebug_history
-
-# RubyMine
-/.idea/*

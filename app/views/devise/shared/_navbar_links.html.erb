@@ -1,6 +1,0 @@
-<% if user_signed_in? %>
-  <div class="waves-effect btn-flat"><%# current_user.name %></div>
-  <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'waves-effect btn-flat')  %>
-<% else %>
-  <%= link_to('Login / Sign-up', new_user_session_path, class: 'waves-effect btn-flat')  %>
-<% end %>
