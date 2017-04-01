@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<% @assignments.each do |assignment| %>
+<p>
+  <strong>User:</strong>
+  <%= assignment.user_id %>
+</p>
+
+<p>
+  <strong>Assigned to:</strong>
+  <%= assignment.assigned_to_id %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= assignment.year %>
+</p>
+<% end %>
