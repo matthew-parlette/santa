@@ -12,7 +12,17 @@ ActiveAdmin.register User do
   #   permitted
   # end
 
-  permit_params :email, :password, :password_confirmation
+  permit_params :email, :password, :password_confirmation,
+                assignment_bans_attributes: [:id, :user, :assigned_to_id, :_destroy]
+
+  controller do
+    def update
+      if params[:user][:password].blank?
+        %w(password password_confirmation).each { |p| params[:user].delete(p) }
+      end
+      super
+    end
+  end
 
   index do
     selectable_column
@@ -24,16 +34,41 @@ ActiveAdmin.register User do
     actions
   end
 
+  show do
+    panel "Details" do
+      table_for user do
+        column :email
+        column :current_sign_in_at
+        column :sign_in_count
+      end
+    end
+    panel "Bans" do
+      table_for user.assignment_bans do
+        column :assigned_to
+      end
+    end
+  end
+
   filter :email
   filter :current_sign_in_at
   filter :sign_in_count
   filter :created_at
 
   form do |f|
-    f.inputs "Admin Details" do
+    f.inputs "User Details" do
       f.input :email
       f.input :password
       f.input :password_confirmation
+    end
+    f.has_many :assignment_bans do |ban|
+      ban.inputs "Bans" do
+        if !ban.object.nil?
+          ban.input :_destroy, :as => :boolean, :label => "Delete?"
+        end
+
+        ban.input :user, collection: User.all.collect {|u| [u.email, u.id]}, as: :select
+        ban.input :assigned_to, collection: User.all.collect {|u| [u.email, u.id]}, as: :select
+      end
     end
     f.actions
   end
