@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<% @assignments.each do |assignment| %>
+<%= render :partial => 'assignments/assignment', :locals => { assignment: assignment } %>
+<% end %>
 
 <h1>Assignments</h1>
 

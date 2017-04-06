@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users
-  root to: "user#index"
+  root to: "user#show"
 
-  resources :users do
+  resources :users, controller: "user" do
     resources :assignment, only: [:index, :show], controller: "assignments", param: :year
   end
 end

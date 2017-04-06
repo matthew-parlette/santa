@@ -1,0 +1,26 @@
+<div class="row">
+  <!-- <div class="col m1">
+  </div> -->
+  <div class="col m3">
+    <div class="profile-picture">
+      <img src="/santa-wave.gif" class="circle responsive-img">
+    </div>
+    <div class="profile-name center-align">
+      <%= @user.email %>
+    </div>
+    <div class="profile-links">
+      <div class="collection">
+        <a href="#!" class="collection-item"><i class="small material-icons" style="vertical-align: bottom">home</i> Overview</a>
+      </div>
+    </div>
+  </div>
+  <div class="col m1">
+  </div>
+  <div class="col m8">
+    <% @assignments.each do |assignment| %>
+      <%= render partial: 'assignments/assignment', locals: { assignment: assignment } %>
+    <% end %>
+  </div>
+  <!-- <div class="col m1">
+  </div> -->
+</div>
