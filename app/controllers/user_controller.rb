@@ -5,16 +5,8 @@ class UserController < ApplicationController
   end
 
   def show
-    if params[:id]
-      @user = User.find(params[:id])
-    else
-      @user = current_user
-    end
+    @user = current_user
+    @user = User.find(params[:id]) if params[:id]
     visible_assignments
   end
-
-  private
-    def visible_assignments
-      @assignments = Assignment.where(user_id: @user.id)
-    end
 end

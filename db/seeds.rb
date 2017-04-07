@@ -17,3 +17,11 @@ User.all.each do |user|
   user.assignment_bans.create!(:assigned_to => user)
   user.assignment_bans.create!(:assigned_to => User.find(user.id + 1)) unless user.id == User.last.id
 end
+
+# Previous year's assignments
+Assignment.create!(user_id: 1, assigned_to_id: 3, year: 2016)
+Assignment.create!(user_id: 2, assigned_to_id: 4, year: 2016)
+Assignment.create!(user_id: 3, assigned_to_id: 5, year: 2016)
+Assignment.create!(user_id: 4, assigned_to_id: 6, year: 2016)
+Assignment.create!(user_id: 5, assigned_to_id: 1, year: 2016)
+Assignment.create!(user_id: 6, assigned_to_id: 2, year: 2016)
