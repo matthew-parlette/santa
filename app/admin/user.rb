@@ -12,7 +12,7 @@ ActiveAdmin.register User do
   #   permitted
   # end
 
-  permit_params :email, :password, :password_confirmation,
+  permit_params :first_name, :last_name, :email, :password, :password_confirmation,
                 assignment_bans_attributes: [:id, :user, :assigned_to_id, :_destroy]
 
   controller do
@@ -27,6 +27,7 @@ ActiveAdmin.register User do
   index do
     selectable_column
     id_column
+    column :first_name
     column :email
     column :current_sign_in_at
     column :sign_in_count
@@ -37,6 +38,7 @@ ActiveAdmin.register User do
   show do
     panel "Details" do
       table_for user do
+        column :first_name
         column :email
         column :current_sign_in_at
         column :sign_in_count
@@ -49,6 +51,7 @@ ActiveAdmin.register User do
     end
   end
 
+  filter :first_name
   filter :email
   filter :current_sign_in_at
   filter :sign_in_count
@@ -56,6 +59,8 @@ ActiveAdmin.register User do
 
   form do |f|
     f.inputs "User Details" do
+      f.input :first_name
+      f.input :last_name
       f.input :email
       f.input :password
       f.input :password_confirmation
