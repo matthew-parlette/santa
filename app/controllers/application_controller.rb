@@ -42,6 +42,23 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def visible_ideas
+      if @id
+        @idea = Idea.find(@id)
+      else
+        if @user
+          # Ideas created by current user
+          idea_ids = Idea.where(user: @user.id, created_by: current_user).pluck(:id)
+          # Ideas created by others (public only)
+          if current_user.id != @user.id
+            idea_ids += Idea.where(user: @user, private: false).pluck(:id).uniq
+          end
+          # This step is required to only get unique entries
+          @ideas = Idea.where(id: idea_ids)
+        end
+      end
+    end
+
     def not_authorized
       raise ActionController::RoutingError.new('Not Authorized')
     end

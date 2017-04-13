@@ -13,7 +13,8 @@ ActiveAdmin.register User do
   # end
 
   permit_params :first_name, :last_name, :email, :password, :password_confirmation,
-                assignment_bans_attributes: [:id, :user, :assigned_to_id, :_destroy]
+                assignment_bans_attributes: [:id, :user, :assigned_to_id, :_destroy],
+                ideas_attributes: [:id, :name, :user, :created_by_id, :_destroy]
 
   controller do
     def update
