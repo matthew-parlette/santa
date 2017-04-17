@@ -17,7 +17,15 @@
   <div class="col m1">
   </div>
   <div class="col m8">
-    <% @assignments.each do |assignment| %>
+    <% if @current_assignments %>
+      <% @current_assignments.each do |assignment| %>
+        <%= render partial: 'assignments/assignment', locals: { assignment: assignment } %>
+      <% end %>
+    <% end %>
+    <% @ideas.each do |idea| %>
+      <%= render partial: 'ideas/idea', locals: { idea: idea } %>
+    <% end %>
+    <% @previous_assignments.each do |assignment| %>
       <%= render partial: 'assignments/assignment', locals: { assignment: assignment } %>
     <% end %>
   </div>
