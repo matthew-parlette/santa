@@ -1,0 +1,8 @@
+<div class="fixed-action-btn">
+  <%= link_to ('<i class="large material-icons">menu</i>').html_safe, '#', class: 'btn-floating btn-large red' %>
+  <ul>
+    <% if @additional_options %><%= render partial: @additional_options %><% end %>
+    <li><%= link_to ('<i class="material-icons">people</i>').html_safe, users_path, class: 'btn-floating green' %></li>
+    <li><%= link_to ('<i class="material-icons">person</i>').html_safe, user_path(current_user), class: 'btn-floating yellow' %></li>
+  </ul>
+</div>

@@ -13,6 +13,7 @@ class IdeasController < InheritedResources::Base
 
   def new
     @idea = Idea.new
+    @idea.user_id = @user.id
   end
 
   def edit
@@ -48,7 +49,7 @@ class IdeasController < InheritedResources::Base
 
   private
     def idea_params
-      params.require(:idea).permit(:name, :created_by_id, :private)
+      params.require(:idea).permit(:name, :user_id, :created_by_id, :private)
     end
 
     def find_user

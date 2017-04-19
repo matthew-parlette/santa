@@ -11,22 +11,30 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %>
+  <div class="input-field">
+    <i class="material-icons prefix">textsms</i>
     <%= f.text_field :name %>
+    <%= f.label :name, "Idea" %>
   </div>
 
-  <div class="field">
-    <%= f.label :created_by_id %>
-    <%= f.text_field :created_by_id %>
+  <div class="input-field">
+    <%= f.label :user_id, hidden: true %>
+    <%= f.text_field :user_id, value: @user.id, hidden: true %>
   </div>
 
-  <div class="field">
-    <%= f.label :private %>
-    <%= f.check_box :private %>
+  <div class="input-field">
+    <%= f.label :created_by_id, hidden: true %>
+    <%= f.text_field :created_by_id, value: current_user.id, hidden: true %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="row">
+    <div class="input-field col s6">
+      <%= f.check_box :private %>
+      <%= f.label :private %>
+    </div>
+
+    <div class="input-field col s6">
+      <%= f.submit class: "btn waves-effect waves-light" %>
+    </div>
   </div>
 <% end %>

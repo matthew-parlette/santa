@@ -1,5 +1,6 @@
 class UserController < ApplicationController
   before_action :authenticate_user!
+  before_action :additional_options
 
   def index
   end
@@ -10,4 +11,9 @@ class UserController < ApplicationController
     visible_assignments
     visible_ideas
   end
+
+  private
+    def additional_options
+      @additional_options = 'user/menu'
+    end
 end
