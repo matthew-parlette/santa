@@ -3,6 +3,7 @@ class UserController < ApplicationController
   before_action :additional_options
 
   def index
+    @users = User.all
   end
 
   def show

@@ -3,7 +3,9 @@
     <%= render partial: 'shared/ribbon', locals: { name: assignment.year, color: "green" } %>
     <div class="card-image">
       <img src="/santa-wave.gif">
-      <span class="card-title green-text text-darken-2"><%= assignment.assigned_to.first_name %></span>
+      <%= link_to user_path(assignment.assigned_to) do %>
+        <span class="card-title green-text text-darken-2"><%= assignment.assigned_to.first_name %></span>
+      <% end %>
     </div>
     <div class="card-content">
     </div>

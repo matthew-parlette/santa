@@ -5,8 +5,9 @@
     <div class="card-panel white">
       <span class="black-text">
         <p>This idea will be visible to:</p>
-        <p style="padding-left: 2em;">You</p>
-        <p style="padding-left: 2em;">Everyone but <%= @user.first_name %></p>
+        <p class="if-private" style="padding-left: 2em;">You</p>
+        <p class="if-public" style="padding-left: 2em;">You</p>
+        <p class="if-public" style="padding-left: 2em;">Everyone but <%= @user.first_name %></p>
       </span>
     </div>
   </div>
@@ -14,7 +15,8 @@
     <div class="card-panel white">
       <span class="red-text">
         <p>This idea will NOT be visible to:</p>
-        <p style="padding-left: 2em;"><%= @user.first_name %></p>
+        <p class="if-public" style="padding-left: 2em;"><%= @user.first_name %></p>
+        <p class="if-private" style="padding-left: 2em;">Everyone but you</p>
       </span>
     </div>
   </div>

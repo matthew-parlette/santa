@@ -1,9 +1,14 @@
 <div class="col s12 m6">
   <div class="card hoverable">
-    <%= render partial: 'shared/ribbon', locals: { name: "whatever", color: "red" } %>
+    <% if idea.private %>
+      <%= render partial: 'shared/ribbon', locals: { name: "private", color: "red" } %>
+    <% end %>
+    <% if idea.created_by != current_user %>
+      <%= render partial: 'shared/ribbon', locals: { name: "From #{idea.created_by.first_name}", color: "green" } %>
+    <% end %>
     <div class="card-image">
       <!-- <img src="/santa-wave.gif"> -->
-      <span class="card-title green-text text-darken-2"><%# assignment.assigned_to.first_name %></span>
+      <span class="card-title green-text text-darken-2"></span>
     </div>
     <div class="card-content">
       <span class="card-title">Idea</span>
