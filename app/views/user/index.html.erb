@@ -1,1 +1,11 @@
-<p>user index</p>
+<ul class="collection">
+  <% @users.each do |user| %>
+    <li class="collection-item avatar">
+      <img src="santa-wave.gif" alt="" class="circle">
+      <%= link_to user_path(user) do %>
+        <span class="title"><%= user.first_name %> <%= user.last_name %></span>
+      <% end %>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+  <% end %>
+</ul>
