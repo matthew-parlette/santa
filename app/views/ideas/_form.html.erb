@@ -26,11 +26,14 @@
     <%= f.label :created_by_id, hidden: true %>
     <%= f.text_field :created_by_id, value: current_user.id, hidden: true %>
   </div>
-
   <div class="row">
     <div class="input-field col s6">
-      <%= f.check_box :private %>
-      <%= f.label :private %>
+      <% if @user == current_user %>
+        <%= f.check_box :private, hidden: true %>
+      <% else %>
+        <%= f.check_box :private %>
+        <%= f.label :private %>
+      <% end %>
     </div>
 
     <div class="input-field col s6">

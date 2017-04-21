@@ -1,6 +1,40 @@
-<h1>Editing Idea</h1>
+<h5 class="center-align">Editing Idea for <%= @user.first_name %></h5>
 
-<%= render 'form', idea: @idea %>
+<div class="row">
+  <% if @user == current_user %><div class="col s0 m3"></div><% end %>
+  <div class="col s12 m6">
+    <div class="card-panel white">
+      <span class="black-text">
+        <p>This idea will be visible to:</p>
+        <% if @user == current_user %>
+        <p style="padding-left: 2em;">Everyone<p>
+        <% else %>
+        <p class="if-private" style="padding-left: 2em;">You</p>
+        <p class="if-public" style="padding-left: 2em;">You</p>
+        <p class="if-public" style="padding-left: 2em;">Everyone but <%= @user.first_name %></p>
+        <% end %>
+      </span>
+    </div>
+  </div>
+  <% if @user != current_user %>
+  <div class="col s12 m6">
+    <div class="card-panel white">
+      <span class="red-text">
+        <p>This idea will NOT be visible to:</p>
+        <p class="if-public" style="padding-left: 2em;"><%= @user.first_name %></p>
+        <p class="if-private" style="padding-left: 2em;">Everyone but you</p>
+      </span>
+    </div>
+  </div>
+  <% end %>
+</div>
 
-<%= link_to 'Show', user_idea_path(@user, @idea) %> |
-<%= link_to 'Back', user_ideas_path(@user) %>
+<div class="row">
+  <div class="col s3"></div>
+  <div class="col s6">
+    <div class="card-panel white">
+      <%= render 'form', idea: @idea %>
+    </div>
+  </div>
+  <div class="col s3"></div>
+</div>

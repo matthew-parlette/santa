@@ -24,7 +24,7 @@ class IdeasController < InheritedResources::Base
     @idea = Idea.new(idea_params)
 
     if @idea.save
-      redirect_to user_idea_path(@user, @idea)
+      redirect_to user_path(@user)
     else
       render 'new'
     end
@@ -34,7 +34,7 @@ class IdeasController < InheritedResources::Base
     @idea = Idea.find(params[:id])
 
     if @idea.update(idea_params)
-      redirect_to user_idea_path(@user, @idea)
+      redirect_to user_path(@user)
     else
       render 'edit'
     end
@@ -44,7 +44,7 @@ class IdeasController < InheritedResources::Base
     @idea = Idea.find(params[:id])
     @idea.destroy
 
-    redirect_to user_ideas_path(@user)
+    redirect_to user_path(@user)
   end
 
   private

@@ -1,16 +1,22 @@
 <h5 class="center-align">New Idea for <%= @user.first_name %></h5>
 
 <div class="row">
+  <% if @user == current_user %><div class="col s0 m3"></div><% end %>
   <div class="col s12 m6">
     <div class="card-panel white">
       <span class="black-text">
         <p>This idea will be visible to:</p>
+        <% if @user == current_user %>
+        <p style="padding-left: 2em;">Everyone<p>
+        <% else %>
         <p class="if-private" style="padding-left: 2em;">You</p>
         <p class="if-public" style="padding-left: 2em;">You</p>
         <p class="if-public" style="padding-left: 2em;">Everyone but <%= @user.first_name %></p>
+        <% end %>
       </span>
     </div>
   </div>
+  <% if @user != current_user %>
   <div class="col s12 m6">
     <div class="card-panel white">
       <span class="red-text">
@@ -20,6 +26,7 @@
       </span>
     </div>
   </div>
+  <% end %>
 </div>
 
 <div class="row">
@@ -31,5 +38,3 @@
   </div>
   <div class="col s3"></div>
 </div>
-
-<%= link_to 'Back', user_ideas_path(@user) %>
