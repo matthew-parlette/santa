@@ -2,7 +2,13 @@
   <%= link_to ('<i class="large material-icons">menu</i>').html_safe, '#', class: 'btn-floating btn-large red' %>
   <ul>
     <% if @additional_options %><%= render partial: @additional_options %><% end %>
-    <li><%= link_to ('<i class="material-icons">people</i>').html_safe, users_path, class: 'btn-floating green' %></li>
-    <% if signed_in? %><li><%= link_to ('<i class="material-icons">person</i>').html_safe, user_path(current_user), class: 'btn-floating yellow' %></li><% end %>
+    <li class="tooltipped" data-position="left" data-delay="50" data-tooltip="All Users">
+      <%= link_to ('<i class="material-icons">people</i>').html_safe, users_path, class: 'btn-floating green' %>
+    </li>
+    <% if signed_in? %>
+    <li class="tooltipped" data-position="left" data-delay="50" data-tooltip="Your Profile">
+      <%= link_to ('<i class="material-icons">person</i>').html_safe, user_path(current_user), class: 'btn-floating yellow' %>
+    </li>
+    <% end %>
   </ul>
 </div>
