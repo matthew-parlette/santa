@@ -18,6 +18,7 @@ class IdeasController < InheritedResources::Base
 
   def edit
     @idea = Idea.find(params[:id])
+    not_authorized unless current_user.id == @idea.created_by_id
   end
 
   def create
