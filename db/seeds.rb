@@ -25,3 +25,12 @@ Assignment.create!(user_id: 3, assigned_to_id: 5, year: 2016)
 Assignment.create!(user_id: 4, assigned_to_id: 6, year: 2016)
 Assignment.create!(user_id: 5, assigned_to_id: 1, year: 2016)
 Assignment.create!(user_id: 6, assigned_to_id: 2, year: 2016)
+
+# Ideas
+Idea.create!(name: 'idea 1', user_id: 1, created_by_id: 1, private: false)
+Idea.create!(name: 'idea 2', user_id: 1, created_by_id: 2, private: false)
+Idea.create!(name: 'idea 3', user_id: 2, created_by_id: 3, private: false)
+Idea.create!(name: 'idea 4', user_id: 3, created_by_id: 1, private: false)
+Idea.create!(name: 'idea 5', user_id: 4, created_by_id: 1, private: false)
+Idea.create!(name: 'idea 6', user_id: 5, created_by_id: 1, private: false)
+Idea.create!(name: 'private idea 1', user_id: 6, created_by_id: 3, private: true)

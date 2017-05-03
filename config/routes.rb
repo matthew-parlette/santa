@@ -7,5 +7,6 @@ Rails.application.routes.draw do
 
   resources :users, controller: "user" do
     resources :assignment, only: [:index, :show], controller: "assignments", param: :year
+    resources :ideas
   end
 end
