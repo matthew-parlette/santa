@@ -4,6 +4,7 @@ class IdeasController < InheritedResources::Base
 
   def index
     visible_ideas
+    render 'user/show' if @user
   end
 
   def show
