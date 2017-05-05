@@ -5,6 +5,7 @@ class AssignmentsController < InheritedResources::Base
   def index
     @user = User.find(params[:user_id]) if params[:user_id].present?
     visible_assignments
+    render 'user/show' if @user
   end
 
   # Show a specific year's assignments
@@ -12,5 +13,6 @@ class AssignmentsController < InheritedResources::Base
     @year = params[:year]
     @user = User.find(params[:user_id]) if params[:user_id].present?
     visible_assignments
+    render 'user/show' if @user
   end
 end

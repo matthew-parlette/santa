@@ -10,8 +10,9 @@
     </div>
     <div class="profile-links">
       <div class="collection">
-      <%= link_to ('<i class="small material-icons" style="vertical-align: bottom; padding-right: .5em;">home</i> Overview').html_safe, user_path(@user), class: "collection-item" %>
-      <%= link_to ('<i class="small material-icons" style="vertical-align: bottom; padding-right: .5em;">textsms</i> Ideas').html_safe, user_ideas_path(@user), class: "collection-item" %>
+      <%= link_to ('<i class="small material-icons" style="vertical-align: bottom; padding-right: .25em;">home</i> Overview').html_safe, user_path(@user), class: "collection-item green-text text-darken-2" %>
+      <%= link_to ('<i class="small material-icons" style="vertical-align: bottom; padding-right: .25em;">assignment</i> Assignments').html_safe, user_assignment_index_path(@user), class: "collection-item green-text text-darken-2" %>
+      <%= link_to ('<i class="small material-icons" style="vertical-align: bottom; padding-right: .25em;">textsms</i> Ideas').html_safe, user_ideas_path(@user), class: "collection-item green-text text-darken-2" %>
       </div>
     </div>
   </div>
@@ -28,7 +29,7 @@
         <%= render partial: 'ideas/idea', locals: { idea: idea } %>
       <% end %>
     <% end %>
-    <% if @current_assignments %>
+    <% if @previous_assignments %>
       <% @previous_assignments.each do |assignment| %>
         <%= render partial: 'assignments/assignment', locals: { assignment: assignment } %>
       <% end %>
