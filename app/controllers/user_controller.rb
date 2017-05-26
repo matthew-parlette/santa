@@ -17,7 +17,22 @@ class UserController < ApplicationController
     render 'show'
   end
 
+  def edit
+    @user = current_user
+    render 'devise/registrations/edit'
+  end
+
+  def update
+    puts @user.first_name
+    puts @user.update_attributes(user_params)
+    render 'show'
+  end
+
   private
+    def user_params
+      params.require(:user).permit(:password, :password_confirmation, :avatar)
+    end
+
     def additional_options
       @additional_options = 'user/menu'
     end
