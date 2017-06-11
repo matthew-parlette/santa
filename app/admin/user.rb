@@ -12,7 +12,7 @@ ActiveAdmin.register User do
   #   permitted
   # end
 
-  permit_params :first_name, :last_name, :email, :password, :password_confirmation,
+  permit_params :first_name, :last_name, :email, :password, :password_confirmation, :avatar,
                 assignment_bans_attributes: [:id, :user, :assigned_to_id, :_destroy],
                 ideas_attributes: [:id, :name, :user, :created_by_id, :_destroy]
 
@@ -39,6 +39,9 @@ ActiveAdmin.register User do
   show do
     panel "Details" do
       table_for user do
+        column :avatar do
+          user.avatar? ? image_tag(user.avatar.url, height: '50') : content_tag(:span, "No avatar")
+        end
         column :first_name
         column :email
         column :current_sign_in_at
@@ -65,6 +68,7 @@ ActiveAdmin.register User do
       f.input :email
       f.input :password
       f.input :password_confirmation
+      f.input :avatar, as: :file
     end
     f.has_many :assignment_bans do |ban|
       ban.inputs "Bans" do
