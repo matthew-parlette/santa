@@ -1,0 +1,29 @@
+<% @assignments.each do |assignment| %>
+<%= render :partial => 'assignments/assignment', :locals => { assignment: assignment } %>
+<% end %>
+
+<h1>Assignments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Assigned to</th>
+      <th>Year</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assignments.each do |assignment| %>
+      <tr>
+        <td><%= assignment.user %></td>
+        <td><%= assignment.assigned_to %></td>
+        <td><%= assignment.year %></td>
+        <td><%= link_to 'Show', assignment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

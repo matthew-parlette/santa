@@ -1,11 +1,31 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  year: MyString
+one2016:
   user: one
-  assignment: MyString
+  assigned_to: two
+  year: 2016
 
-two:
-  year: MyString
+two2016:
   user: two
-  assignment: MyString
+  assigned_to: one
+  year: 2016
+
+one2017:
+  user: one
+  assigned_to: two
+  year: 2017
+
+two2017:
+  user: two
+  assigned_to: one
+  year: 2017
+
+one2018:
+  user: one
+  assigned_to: two
+  year: 2018
+
+two2018:
+  user: two
+  assigned_to: one
+  year: 2018

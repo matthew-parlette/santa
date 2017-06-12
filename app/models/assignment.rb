@@ -1,4 +1,4 @@
 class Assignment < ApplicationRecord
   belongs_to :user
-  has_one :user, as: :assignment
+  belongs_to :assigned_to, :class_name => "User"
 end
