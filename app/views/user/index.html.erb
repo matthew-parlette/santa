@@ -1,7 +1,7 @@
 <ul class="collection">
   <% @users.each do |user| %>
     <li class="collection-item avatar">
-      <img src="santa-wave.gif" alt="" class="circle">
+      <%= image_tag(user.avatar.url(:large), class: "circle responsive-img") %>
       <%= link_to user_path(user) do %>
         <span class="title"><%= user.first_name %> <%= user.last_name %></span>
       <% end %>

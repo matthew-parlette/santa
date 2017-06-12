@@ -13,7 +13,10 @@
     <nav>
     <div class="nav-wrapper">
       <a href="#" class="brand-logo"><img src="/santa-wave.gif" style="height 80px; width: 80px;"></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <ul id="nav-mobile" class="right">
+        <% if user_signed_in? %>
+          <li><%= link_to current_user.first_name, edit_user_registration_path %></li>
+        <% end %>
         <% if user_signed_in? %>
           <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
         <% else %>
