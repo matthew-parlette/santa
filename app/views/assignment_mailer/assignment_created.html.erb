@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Your secret santa assignment for this year is <%= @assignment.assigned_to.first_name %> <%= @assignment.assigned_to.last_name %></h1>
+    <p>
+      See your secret santa's profile to view or add ideas: <a href="<%= ENV['default_url_host'] %>/users/<%= @assignment.assigned_to.id %>"><%= ENV['default_url_host'] %>/users/<%= @assignment.assigned_to.id %></a>
+    </p>
+    <p>
+      To view or update your own profile: <a href="<%= ENV['default_url_host'] %>/users/<%= @user.id %>"><%= ENV['default_url_host'] %>/users/<%= @user.id %></a>
+    </p>
+  </body>
+</html>
