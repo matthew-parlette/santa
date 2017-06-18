@@ -22,3 +22,6 @@
 
 # Ignore user images
 public/system/users
+
+# Ignore application configuration
+/config/application.yml

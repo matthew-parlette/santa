@@ -4,28 +4,26 @@ namespace :assignments do
   desc "Generate assignments for a year"
   task generate: :environment do
     year = Time.zone.now.year
-    if Assignment.where(year: year).empty? then
+    puts "Assignments already exist for #{year}" unless Assignment.where(year: year).empty?
+    while Assignment.where(year: year).empty? do
       puts "Generating assignments for #{year}..."
       users = User.all
-      Timeout.timeout(60) do
-        users.each do |user|
-          begin
-            assigned_to_id = nil
-            while assigned_to_id.nil? do
-              random_user_id = users.sample.id
-              assigned_to_id = random_user_id unless AssignmentBan.where(user: user, assigned_to_id: random_user_id).any?
-              assigned_to_id = nil if Assignment.where(assigned_to_id: random_user_id, year: year).any?
-            end
-            Assignment.create!(user: user, assigned_to_id: assigned_to_id, year: year)
-          rescue Timeout::Error => e
-            puts "Assignment generation timed out! Likely you just need to run this again."
-            Assignment.where(year: year).destroy_all
-            next # Just exit the rake task at this point
-          end
+      users.each do |user|
+        assigned_to_id = nil
+        attempts = 0
+        while assigned_to_id.nil? do
+          attempts += 1
+          random_user_id = users.sample.id
+          assigned_to_id = random_user_id unless AssignmentBan.where(user: user, assigned_to_id: random_user_id).any?
+          assigned_to_id = nil if Assignment.where(assigned_to_id: random_user_id, year: year).any?
+          break if attempts > 30
         end
+        Assignment.create!(user: user, assigned_to_id: assigned_to_id, year: year) unless assigned_to_id.nil?
       end
-    else
-      puts "Assignments already exist for #{year}"
+      if Assignment.where(year: year).count != User.count then
+        puts "Assignment generation failed! Retrying..."
+        Assignment.where(year: year).destroy_all
+      end
     end
     puts "Assignments generated for #{year}!"
     Rake::Task["assignments:verify"].invoke
