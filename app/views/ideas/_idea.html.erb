@@ -16,12 +16,13 @@
     <div class="card-content">
       <span class="card-title grey-text text-lighten-1">Idea</span>
       <!-- <hr> -->
-      <p class="flow-text" style="word-wrap: break-word;"><%= auto_link(idea.name, :html => { :target => '_blank' }) %></p>
+      <p style="word-wrap: break-word; font-weight: 400;"><%= auto_link(idea.name, :html => { :target => '_blank' }) %></p>
+    </div>
     <% if current_user.id == idea.created_by_id %>
     <div class="card-action">
       <%= link_to "Edit", edit_user_idea_path(@user, idea) %>
+      <%= link_to "Delete", user_idea_path(@user, idea), data: {:confirm => 'Are you sure?'}, :method => :delete %>
     </div>
     <% end %>
-    </div>
   </div>
 </div>
