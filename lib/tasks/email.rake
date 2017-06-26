@@ -13,3 +13,12 @@ namespace 'email:assignments' do
     end
   end
 end
+
+namespace 'email' do
+  desc "Email all users a link to reset their password"
+  task welcome: :environment do
+    User.all.each do |u|
+      u.send_reset_password_instructions
+    end
+  end
+end

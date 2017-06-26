@@ -26,7 +26,7 @@ module Santa
         :user_name => ENV['smtp_username'],
         :password => ENV['smtp_password'],
         :authentication => ENV['smtp_authentication'],
-        :enable_starttls_auto => ENV['smtp_enable_starttls_auto']
+        :enable_starttls_auto => true # ENV['smtp_enable_starttls_auto']
     }
   end
 end
