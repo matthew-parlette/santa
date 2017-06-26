@@ -1,24 +1,43 @@
-# README
+# Overview
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a secret santa management website. It will handle:
 
-Things you may want to cover:
+* Managing user bans (so couples can't be assigned to each other)
+* Creating assignments
+* Emailing assignments and reminders
+* Allow users to propose ideas for other users (that are not visible to the target user)
 
-* Ruby version
+## Usage
 
-* System dependencies
+### Docker
 
-* Configuration
+#### Build
 
-* Database creation
+```
+$ docker build -t santa .
+```
 
-* Database initialization
+#### Run
 
-* How to run the test suite
+##### Development
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+$ docker run -i -e RAILS_ENV=development -p 3000:3000 --name santa -t santa
+```
 
-* Deployment instructions
+This will run the container in the foreground. If you would like to run this as a background job, remove the `-i` argument and hit CTRL+C to break out of the container output.
 
-* ...
+##### Production
+
+Production requires a SECRET_KEY_BASE to be provided as an environment variable. This can be generated with `rails secret`.
+
+```
+$ docker run -i -e RAILS_ENV=production -e SECRET_KEY_BASE=whatever -e RAILS_SERVE_STATIC_FILES=true -p 3000:3000 --name santa -t santa
+```
+
+In production, there are no users or admins by default, so you will need to create the first admin user:
+
+```
+$ docker exec -it santa /bin/bash -c 'rails c'
+> AdminUser.create!(email: 'matthew.parlette@gmail.com', password: 'password', password_confirmation: 'password')
+```
