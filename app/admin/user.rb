@@ -1,22 +1,19 @@
+include Devise
+
 ActiveAdmin.register User do
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # permit_params :list, :of, :attributes, :on, :model
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:permitted, :attributes]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
 
   permit_params :first_name, :last_name, :email, :password, :password_confirmation, :avatar,
                 assignment_bans_attributes: [:id, :user, :assigned_to_id, :_destroy],
                 ideas_attributes: [:id, :name, :user, :created_by_id, :_destroy]
 
   controller do
+    def create
+      if params[:user][:password].blank?
+        password = Devise.friendly_token.first(8)
+        %w(password password_confirmation).each { |p| params[p] = password }
+      end
+      super
+    end
     def update
       if params[:user][:password].blank?
         %w(password password_confirmation).each { |p| params[:user].delete(p) }
@@ -66,8 +63,8 @@ ActiveAdmin.register User do
       f.input :first_name
       f.input :last_name
       f.input :email
-      f.input :password
-      f.input :password_confirmation
+      f.input :password, :required => false, :hint => "Leave blank to auto-generate"
+      f.input :password_confirmation, :required => false
       f.input :avatar, as: :file
     end
     f.has_many :assignment_bans do |ban|
