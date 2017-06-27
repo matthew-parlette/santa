@@ -1,0 +1,45 @@
+<h2>Edit Your Profile</h2>
+<%= form_for(resource, as: resource_name, url: user_registration_path, html: { method: :patch }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <!-- <div class="input-field">
+    <%= f.label :email, hidden: true %><br />
+    <%= f.email_field :email, autofocus: true, hidden: true %>
+  </div> -->
+
+  <div class="input-field">
+    <%= f.label :avatar, "Profile Picture" %><br /><br />
+    <%= f.file_field :avatar %>
+  </div>
+
+  <hr>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="row">
+    <div class="input-field col s6">
+      <%= f.label :password %><br />
+      <%= f.password_field :password, autocomplete: "off", placeholder: "leave blank if you don't want to change it" %>
+      <% if @minimum_password_length %>
+        <br />
+        <em><%= @minimum_password_length %> characters minimum</em>
+      <% end %>
+    </div>
+
+    <div class="input-field col s6">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
+  </div>
+
+  <div class="input-field">
+    <%= f.label :current_password %><br />
+    <%= f.password_field :current_password, autocomplete: "off", placeholder: "we need your current password to confirm your changes" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>

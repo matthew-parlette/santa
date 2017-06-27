@@ -1,0 +1,43 @@
+<%= form_for [@user, @idea] do |f| %>
+  <% if idea.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
+
+      <ul>
+      <% idea.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="input-field">
+    <i class="material-icons prefix">textsms</i>
+    <%= f.text_field :name, autofocus: true %>
+    <%= f.label :name, "Idea" %>
+  </div>
+
+  <div class="input-field">
+    <%= f.label :user_id, hidden: true %>
+    <%= f.text_field :user_id, value: @user.id, hidden: true %>
+  </div>
+
+  <div class="input-field">
+    <%= f.label :created_by_id, hidden: true %>
+    <%= f.text_field :created_by_id, value: current_user.id, hidden: true %>
+  </div>
+  <div class="row">
+    <div class="input-field col s6">
+      <% if @user == current_user %>
+        <%= f.check_box :private, hidden: true %>
+      <% else %>
+        <%= f.check_box :private %>
+        <%= f.label :private %>
+      <% end %>
+    </div>
+
+    <div class="input-field col s6">
+      <%= f.submit class: "btn waves-effect waves-light" %>
+    </div>
+  </div>
+<% end %>
