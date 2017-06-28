@@ -11,4 +11,4 @@ RUN bundle install
 COPY . .
 
 EXPOSE 3000
-CMD rails db:setup && rails assets:precompile && rails server -b 0.0.0.0
+CMD rails db:create db:migrate && rails assets:precompile && rails server -b 0.0.0.0
