@@ -2,7 +2,9 @@
   <div class="card hoverable">
     <% if idea.private %>
       <%= render partial: 'shared/ribbon', locals: { name: "private", color: "red" } %>
-    <% elsif (idea.name.include?("amazon.com") && idea.name.include?("wishlist")) %>
+    <% elsif ((idea.name.include?("amazon.com") &&
+               idea.name.include?("wishlist")) ||
+               idea.name.include?("a.co")) %>
       <%= render partial: 'shared/ribbon', locals: { name: "Wishlist", color: "green" } %>
     <% elsif idea.created_by != current_user %>
       <%= render partial: 'shared/ribbon', locals: { name: "From #{idea.created_by.first_name}", color: "green" } %>
