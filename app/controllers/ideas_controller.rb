@@ -1,5 +1,6 @@
 class IdeasController < InheritedResources::Base
   before_action :authenticate_user!
+  before_action :additional_options
   before_action :find_user
 
   def index
@@ -52,6 +53,10 @@ class IdeasController < InheritedResources::Base
   private
     def idea_params
       params.require(:idea).permit(:name, :user_id, :created_by_id, :private)
+    end
+
+    def additional_options
+      @additional_options = 'user/menu'
     end
 
     def find_user
