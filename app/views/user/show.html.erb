@@ -19,22 +19,37 @@
   <div class="col m1">
   </div>
   <div class="col m8">
-    <% if @current_assignments %>
-      <% @current_assignments.each do |assignment| %>
-        <%= render partial: 'assignments/assignment', locals: { assignment: assignment } %>
-      <% end %>
-    <% end %>
-  <% if @ideas %>
-      <% @ideas.each do |idea| %>
-        <%= render partial: 'ideas/idea', locals: { idea: idea } %>
-      <% end %>
-    <% end %>
-    <% if @previous_assignments %>
-      <% @previous_assignments.each do |assignment| %>
-        <%= render partial: 'assignments/assignment', locals: { assignment: assignment } %>
-      <% end %>
-    <% end %>
+    <div class="row">
+      <div class="col m12">
+        <% if @current_assignments %>
+          <% @current_assignments.each do |assignment| %>
+            <%= render partial: 'assignments/assignment', locals: { assignment: assignment } %>
+          <% end %>
+        <% end %>
+        <% if @ideas %>
+          <% @ideas.each do |idea| %>
+            <%= render partial: 'ideas/idea', locals: { idea: idea } %>
+          <% end %>
+        <% end %>
+        <% if @previous_assignments %>
+          <% @previous_assignments.each do |assignment| %>
+            <%= render partial: 'assignments/assignment', locals: { assignment: assignment } %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col m12">
+        <% if @current_assignments or @ideas.count > 0 or @previous_assignments %>
+        <hr>
+        <p class="center-align">Have an idea for <%= @user.first_name %>?</p>
+        <% else %>
+        <p class="center-align">No ideas for <%= @user.first_name %></p>
+        <% end %>
+        <div class="center-align">
+          <%= link_to ('<i class="small material-icons" style="vertical-align: bottom; padding-right: .25em;">textsms</i> Add one here!').html_safe, new_user_idea_path(@user), class: "" %>
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- <div class="col m1">
-  </div> -->
 </div>
