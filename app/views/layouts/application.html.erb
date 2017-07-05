@@ -12,7 +12,7 @@
   <body>
     <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo"><img src="/santa-wave.gif" style="height 80px; width: 80px;"></a>
+      <%= link_to ('<img src="/santa-wave.gif" style="height 80px; width: 80px;">').html_safe, users_path, class: 'brand-logo' %>
       <ul id="nav-mobile" class="right">
         <% if user_signed_in? %>
           <li><%= link_to current_user.first_name, edit_user_registration_path %></li>
