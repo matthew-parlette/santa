@@ -46,4 +46,24 @@ ActiveAdmin.register Assignment do
     f.actions
   end
 
+  # Generate assignments for this year
+  action_item :generate, only: :index do
+    link_to "Generate Assignments for #{Time.zone.now.year}", "/admin/assignments/generate", :method => :post
+  end
+
+  collection_action :generate, :method => :post do
+    system "rails assignments:generate"
+    system "rails email:assignments:created"
+    redirect_to admin_assignments_path, :notice => "Assignments generated and users notified!"
+  end
+
+  # Email assignments
+  action_item :email, only: :index do
+    link_to "Send Reminder Email", "/admin/assignments/email", :method => :post
+  end
+
+  collection_action :email, :method => :post do
+    system "rails email:assignments:reminder"
+    redirect_to admin_assignments_path, :notice => "Reminders sent!"
+  end
 end
