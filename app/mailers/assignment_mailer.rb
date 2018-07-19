@@ -1,5 +1,5 @@
 class AssignmentMailer < ApplicationMailer
-  default from: 'santa@parlette.us'
+  default from: (ENV['smtp_from'] || 'please-set-in-app-mailers-assignment-mailer-rb')
 
   def assignment_created(user)
     @user = User.find(user)
