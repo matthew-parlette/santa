@@ -80,4 +80,14 @@ ActiveAdmin.register User do
     f.actions
   end
 
+  # Reminder email
+  action_item :email, only: :show do
+    link_to "Send Reminder Email", email_admin_user_path, :method => :post
+  end
+
+  member_action :email, :method => :post do
+    AssignmentMailer.assignment_reminder(User.find(params[:id]))
+    redirect_to admin_user_path, :notice => "Reminder sent!"
+  end
+
 end
