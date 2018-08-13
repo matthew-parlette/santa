@@ -86,7 +86,7 @@ ActiveAdmin.register User do
   end
 
   member_action :email, :method => :post do
-    AssignmentMailer.assignment_reminder(User.find(params[:id]))
+    AssignmentMailer.assignment_reminder(User.find(params[:id])).deliver_now
     redirect_to admin_user_path, :notice => "Reminder sent!"
   end
 
